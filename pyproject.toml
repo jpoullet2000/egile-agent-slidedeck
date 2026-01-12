@@ -1,0 +1,55 @@
+[project]
+name = "egile-agent-slidedeck"
+version = "0.1.0"
+description = "Slide deck generation agent plugin for Egile Agent Core"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Egile Team" }
+]
+keywords = ["agent", "powerpoint", "ai", "presentation", "mcp", "plugin"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "egile-agent-core",
+    "egile-mcp-slidedeck",
+    "agno>=2.3.0",
+    "httpx>=0.27.0",
+    "uvicorn[standard]>=0.24.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.entry-points."egile_agent_core.plugins"]
+slidedeck = "egile_agent_slidedeck:SlideDeckPlugin"
+
+[project.scripts]
+slidedeck = "egile_agent_slidedeck:run_all"
+slidedeck-mcp = "egile_agent_slidedeck.run_mcp:run_mcp_only"
+slidedeck-agent = "egile_agent_slidedeck.run_agent:run_agent_only"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/egile_agent_slidedeck"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
